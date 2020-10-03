@@ -1,7 +1,7 @@
 //import express from 'express';
 var express = require('express');
 var app = express();
-
+app.use(express.static(__dirname + '/public'));//usando middleware para servir archivos estaticos 
 app.set('port', process.env.PORT || 3000);
 
 var handlebars = require('express3-handlebars')//importando handlebars
@@ -28,7 +28,7 @@ app.use(function(err, req, res, next){
     console.error(err.stack);
     res.status(500);
     res.render('500');
-}); 
+});
 app.listen(app.get('port'), function(){//set listen port
     console.log( 'Express started on http://localhost:'+app.get('port')+'; press Ctrl C to terminate.');
 });
