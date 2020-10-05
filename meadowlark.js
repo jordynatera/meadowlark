@@ -16,7 +16,9 @@ app.get('/', function(req, res){
 });
 
 app.get('/about', function(req, res){
-    res.render('about');
+    var randomFortune = 
+        fortunes[Math.floor(Math.random() * fortunes.length)];//devuelve una fortuna aleatoria
+    res.render('about', {fortune : randomFortune});//renderiza la fortuna aleatoria y la manda a la página About
 });
 //middleware for 404 Not Found/ Catch-all handler
 app.use(function(req, res, next) {
@@ -29,6 +31,15 @@ app.use(function(err, req, res, next){
     res.status(500);
     res.render('500');
 });
+
 app.listen(app.get('port'), function(){//set listen port
     console.log( 'Express started on http://localhost:'+app.get('port')+'; press Ctrl C to terminate.');
 });
+
+var fortunes = [
+    "Conquista tus sueños o ellos te conquistarán",
+    "Los ríos necesitan de la primavera",
+    "No le temas a lo desconocido",
+    "Tendrás una agradable sorpresa",
+    "Cuando sea posible, mantenlo simple"
+];
